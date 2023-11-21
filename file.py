@@ -3,7 +3,7 @@ from contextlib import nullcontext
 from pathlib import Path
 from typing import Union
 
-from python_assert import assert_dir
+from assertpy.assertpy import assert_that
 from tqdm import tqdm
 
 
@@ -32,7 +32,7 @@ def iterate(
 
 
 def count_files(path: Union[Path, str], recursive: bool = True, ext: str = None) -> int:
-    assert_dir(path)
+    assert_that(path).is_directory().is_readable()
 
     path = Path(path)
     pattern = "**/*" if recursive else "*"
