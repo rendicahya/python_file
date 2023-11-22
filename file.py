@@ -8,8 +8,9 @@ from tqdm import tqdm
 
 
 def iterate(
-    path: Path, operation, extension=None, progress_bar=True, single=False
+    path: Union[Path, str], operation, extension=None, progress_bar=True, single=False
 ) -> None:
+    path = Path(path)
     n_files = count_files(path, recursive=True, extension=extension)
 
     with tqdm(total=n_files) if progress_bar else nullcontext() as bar:
