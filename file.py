@@ -43,5 +43,12 @@ def count_files(path: Union[Path, str], recursive: bool = True, ext: str = None)
     return sum(1 for f in path.glob(pattern))
 
 
+def count_dir(path: Union[Path, str], recursive: bool = False) -> int:
+    if recursive:
+        return sum([len(dirs) for root, dirs, files in os.walk(path)])
+    else:
+        return len(next(os.walk(path))[1])
+
+
 def correct_suffix(suffix: str) -> str:
     return suffix if suffix.startswith(".") else "." + suffix
